@@ -1,0 +1,26 @@
+package rules
+
+import com.gmail.ynmatskevich.calculate.DeliveryCostWithDrools;
+
+dialect "java"
+
+rule "weight is less than 10 KG"
+    when
+        deliveryCost : DeliveryCostWithDrools(weight <= 10)
+    then
+        deliveryCost.setPrice(10.0);
+end
+
+rule "weight is between 10 and 30 KG"
+    when
+        deliveryCost : DeliveryCostWithDrools(weight > 10, weight < 30)
+    then
+        deliveryCost.setPrice(15.0);
+end
+
+rule "weight is more than 30 KG"
+    when
+        deliveryCost : DeliveryCostWithDrools(weight >= 30)
+    then
+        deliveryCost.setPrice(25.0);
+end
